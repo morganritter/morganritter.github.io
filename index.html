@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morgan T. Ritter - Strategy & Operations Leader</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Work+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0A1929;
+            --secondary: #1E3A5F;
+            --accent: #FF6B35;
+            --text: #2C3E50;
+            --text-light: #5A6C7D;
+            --background: #FAFBFC;
+            --card: #FFFFFF;
+            --border: #E1E8ED;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        header {
+            background: var(--primary);
+            color: white;
+            padding: 4rem 0 3rem;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            animation: fadeInDown 0.8s ease forwards;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -10%;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--secondary) 0%, transparent 100%);
+            transform: skewX(-15deg);
+            opacity: 0.3;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 4rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        .title {
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 2rem;
+            letter-spacing: 0.02em;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .contact-info a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .contact-info a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            color: var(--accent);
+        }
+
+        .contact-info a:hover::after {
+            width: 100%;
+        }
+
+        /* Main Content */
+        main {
+            padding: 4rem 0;
+        }
+
+        .section {
+            margin-bottom: 5rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .section:nth-child(1) { animation-delay: 0.2s; }
+        .section:nth-child(2) { animation-delay: 0.3s; }
+        .section:nth-child(3) { animation-delay: 0.4s; }
+        .section:nth-child(4) { animation-delay: 0.5s; }
+
+        .section-title {
+            font-family: 'DM Serif Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 2.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        /* Experience Cards */
+        .experience-item {
+            background: var(--card);
+            border-left: 4px solid var(--border);
+            padding: 2rem 2.5rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .experience-item:hover {
+            border-left-color: var(--accent);
+            transform: translateX(8px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .job-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .company {
+            font-weight: 600;
+            color: var(--accent);
+            font-size: 1.1rem;
+        }
+
+        .date {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .job-description {
+            color: var(--text-light);
+            margin-bottom: 1.25rem;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .achievements {
+            list-style: none;
+        }
+
+        .achievements li {
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+            position: relative;
+            color: var(--text);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .achievements li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* Education & Skills */
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .education-card {
+            background: var(--card);
+            padding: 2rem;
+            border-top: 3px solid var(--accent);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .education-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        }
+
+        .degree {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .school {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .skills-section {
+            background: var(--primary);
+            color: white;
+            padding: 3rem;
+            margin-top: 3rem;
+            border-radius: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skills-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 60%;
+            height: 200%;
+            background: linear-gradient(135deg, var(--secondary) 0%, transparent 100%);
+            transform: rotate(15deg);
+            opacity: 0.2;
+        }
+
+        .skills-section h3 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .skill-category h4 {
+            color: var(--accent);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.4rem 0.9rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .title {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .job-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .experience-item {
+                padding: 1.5rem;
+            }
+
+            .skills-section {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+            }
+
+            header {
+                background: white;
+                color: var(--primary);
+                page-break-after: avoid;
+            }
+
+            header::before {
+                display: none;
+            }
+
+            .experience-item {
+                page-break-inside: avoid;
+                border-left-color: var(--primary);
+            }
+
+            .skills-section {
+                background: white;
+                color: var(--primary);
+                border: 2px solid var(--primary);
+            }
+
+            .skill-tag {
+                border-color: var(--primary);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <h1>Morgan T. Ritter</h1>
+            <p class="title">Strategy & Operations Leader</p>
+            <div class="contact-info">
+                <span>Salt Lake City, UT</span>
+                <a href="tel:614-537-1191">614-537-1191</a>
+                <a href="mailto:morgan.ritter@gmail.com">morgan.ritter@gmail.com</a>
+                <a href="https://linkedin.com/in/morgan-ritter" target="_blank">linkedin.com/in/morgan-ritter</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="section">
+                <h2 class="section-title">Experience</h2>
+
+                <div class="experience-item">
+                    <div class="job-header">
+                        <div>
+                            <div class="company">Workday</div>
+                            <div class="job-title">Principal, Strategy & Operations</div>
+                        </div>
+                        <div class="date">2024-Present</div>
+                    </div>
+                    <p class="job-description">Strategy & Operations leader for Workday's Global Procurement Office, partnering with Finance and enterprise leaders to translate enterprise strategy into operating cadence, performance management, and measurable outcomes.</p>
+                    <ul class="achievements">
+                        <li>Designed and launched the GPO-wide OKR program, replacing fragmented planning and reporting, aligning four departments to enterprise priorities and establishing a single executive operating rhythm adopted across the org.</li>
+                        <li>Directed the 3-Year Strategic Planning process, driving alignment across 15+ functional stakeholders and establishing a unified roadmap that shaped FY26–FY28 initiatives and informed quarterly execution cadences.</li>
+                        <li>Restructured a 140+ person global organization to address capability gaps and decision latency, redefining roles, spans of control, and succession paths to improve enterprise integration and long-term scalability.</li>
+                        <li>Led procurement's AI strategy activation, deploying operating models and upskilling frameworks that accelerated pilot-to-production timelines and reduced manual workload by 38% in targeted processes.</li>
+                        <li>Owned a $1.2M strategic vendor portfolio, achieving over 95% on-time milestone delivery while negotiating ~13% cost reductions through consolidated governance and performance accountability.</li>
+                        <li>Accelerated leadership prioritization from 3 weeks to 5 days by standardizing initiative scoring and tradeoff models, reducing priority churn and improving budget-aligned decision velocity.</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <div class="job-header">
+                        <div>
+                            <div class="company">Zillow</div>
+                            <div class="job-title">Senior Strategy & Business Operations Manager</div>
+                        </div>
+                        <div class="date">2023-2024</div>
+                    </div>
+                    <p class="job-description">Managed the Partner Strategy portfolio that defines and implements partner standards for the Zillow Premier Agent business, overseeing the partner network of 75K+ agents to uplevel performance and meet company-wide financial goals.</p>
+                    <ul class="achievements">
+                        <li>Scaled the Real Time Touring Product from 6 pilot markets to 90 markets in under 6 months by developing a scaled operational strategy, including the sales enablement strategy and partner training to enable over 17K+ agents.</li>
+                        <li>Developed a scaled vendor performance management system for the Real Time Touring product leading to an increase of 21% in partner transaction uplift in enabled markets resulting in a $4.9M increase in revenue for Q3.</li>
+                        <li>Pioneered the go-to-market strategy for the "Best of Zillow" program, optimizing high-intent leads being delivered to the best-performing partners, reaching over 47K+ real estate agents on the Zillow platform in under 4 months.</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <div class="job-header">
+                        <div>
+                            <div class="company">Meta (Facebook)</div>
+                            <div class="job-title">Senior Program Manager</div>
+                        </div>
+                        <div class="date">2022-2023</div>
+                    </div>
+                    <p class="job-description">Planned and managed the Global Partner Strategy portfolio to optimize the global workforce for a shared service operation which handled millions of transactions daily for multiple lines of business to serve Meta's vast community.</p>
+                    <ul class="achievements">
+                        <li>Saved $13.86M in 2022 by optimizing the vendor portfolio through contract negotiations and resource consolidation.</li>
+                        <li>Built and deployed a vendor performance system to oversee $2.2B in annual spend, improving vendor accountability, driving a 15% performance uplift, and enabling long-term scalable governance practices.</li>
+                        <li>Developed and launched a vendor portal that cut exception request backlog by 85% through process centralization.</li>
+                        <li>Optimized BPO operations for 15 vendors, improving workforce planning and service delivery across 50K+ contractors.</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <div class="job-header">
+                        <div>
+                            <div class="company">NVR, Inc.</div>
+                            <div class="job-title">Manager, Financial Cost</div>
+                        </div>
+                        <div class="date">2019-2022</div>
+                    </div>
+                    <p class="job-description">Headed the Ryan Homes Raleigh Division's financial analysis, cost control, vendor management, and go-to-market strategy. Led a team of 10 professionals responsible for all finance and administrative activities across the entire division.</p>
+                    <ul class="achievements">
+                        <li>Reduced direct costs by $673K for CY 2020 through contract negotiation and vendor performance management, resulting in a 1.9% profit margin increase for the year.</li>
+                        <li>Led the competitive RFPs, vendor selection, and management of over 100 vendors across multiple categories.</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <div class="job-header">
+                        <div>
+                            <div class="company">NVR, Inc.</div>
+                            <div class="job-title">Operations Manager</div>
+                        </div>
+                        <div class="date">2017-2019</div>
+                    </div>
+                    <p class="job-description">Led a cross-functional team of 40 across 8 production sites, overseeing strategic planning, expansions, and capital projects; identified and implemented improvements through financial and data-driven analysis.</p>
+                    <ul class="achievements">
+                        <li>Led the acquisition and contract negotiation of a new 150K square foot production facility including 4,500 square feet of new office, and $6.3M in equipment purchases, valued at $21M and coming in $800K under budget.</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <div class="job-header">
+                        <div>
+                            <div class="company">U.S. Marine Corps</div>
+                            <div class="job-title">Director, Operations</div>
+                        </div>
+                        <div class="date">2007-2017</div>
+                    </div>
+                    <p class="job-description">Served as a member of Marine Special Operations, culminating as a director responsible for coordination of all Special Operations Forces in Iraq (2016), consisting of a multi-national coalition spanning 11 countries and over 25 U.S. agencies.</p>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">Education</h2>
+                <div class="education-grid">
+                    <div class="education-card">
+                        <div class="degree">Master of Business Administration (MBA)</div>
+                        <div class="school">University of North Carolina, Kenan-Flagler Business School</div>
+                        <div class="school">Chapel Hill, NC</div>
+                        <p style="margin-top: 0.5rem; color: var(--text-light); font-size: 0.9rem;">Operations Management</p>
+                    </div>
+                    <div class="education-card">
+                        <div class="degree">Bachelor of Arts</div>
+                        <div class="school">Ohio State University</div>
+                        <div class="school">Columbus, OH</div>
+                        <p style="margin-top: 0.5rem; color: var(--text-light); font-size: 0.9rem;">Political Science</p>
+                    </div>
+                </div>
+            </section>
+
+            <div class="skills-section">
+                <h3>Skills & Certifications</h3>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h4>Certifications</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Certified ScrumMaster (CSM)</span>
+                            <span class="skill-tag">Lean Six Sigma Green Belt</span>
+                            <span class="skill-tag">Project Management Essentials</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h4>Technical Skills</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">SQL</span>
+                            <span class="skill-tag">Tableau</span>
+                            <span class="skill-tag">Power BI</span>
+                            <span class="skill-tag">Advanced Excel</span>
+                            <span class="skill-tag">GenAI Tools</span>
+                            <span class="skill-tag">PowerPoint</span>
+                            <span class="skill-tag">Jira</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

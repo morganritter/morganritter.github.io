@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morgan T. Ritter - Strategy & Operations Leader</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;600;700&family=Cabinet+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0F172A;
+            --secondary: #1E293B;
+            --accent: #F59E0B;
+            --accent-secondary: #3B82F6;
+            --text: #0F172A;
+            --text-light: #E2E8F0;
+            --text-muted: #475569;
+            --gradient-1: #F59E0B;
+            --gradient-2: #EC4899;
+            --gradient-3: #3B82F6;
+            --card-bg: #FFFFFF;
+            --card-text: #0F172A;
+            --border: rgba(15, 23, 42, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cabinet Grotesk', -apple-system, sans-serif;
+            background: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.15s ease, border-color 0.3s ease;
+            mix-blend-mode: difference;
+        }
+
+        .cursor-follower {
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.3s cubic-bezier(0.75, -0.5, 0, 1.75);
+        }
+
+        /* Animated Background */
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: linear-gradient(135deg, 
+                var(--primary) 0%, 
+                var(--secondary) 50%, 
+                var(--primary) 100%);
+        }
+
+        .bg-gradient::before,
+        .bg-gradient::after {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.2;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .bg-gradient::before {
+            background: radial-gradient(circle, var(--gradient-1), var(--gradient-2));
+            top: -200px;
+            left: -200px;
+            animation-delay: 0s;
+        }
+
+        .bg-gradient::after {
+            background: radial-gradient(circle, var(--gradient-3), var(--gradient-1));
+            bottom: -200px;
+            right: -200px;
+            animation-delay: 10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(100px, 100px) rotate(90deg); }
+            50% { transform: translate(200px, -50px) rotate(180deg); }
+            75% { transform: translate(-100px, 150px) rotate(270deg); }
+        }
+
+        /* Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--accent);
+            border-radius: 50%;
+            opacity: 0;
+            animation: particleFloat 15s linear infinite;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                opacity: 0;
+                transform: translateY(100vh) translateX(0);
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100vh) translateX(100px);
+            }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.5rem 0;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transform: translateY(-100%);
+            animation: slideDown 0.8s ease forwards 0.5s;
+        }
+
+        @keyframes slideDown {
+            to { transform: translateY(0); }
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding: 6rem 0 4rem;
+        }
+
+        .hero-content {
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards 0.3s;
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+            color: var(--accent);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 1rem;
+        }
+
+        .hero-title {
+            font-family: 'Clash Display', sans-serif;
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #FFFFFF 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-description {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            max-width: 800px;
+        }
+
+        .stat-item {
+            text-align: left;
+        }
+
+        .stat-number {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent);
+            line-height: 1;
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            opacity: 0.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .btn-primary:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-light);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            background: rgba(245, 158, 11, 0.1);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .section-header.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-label {
+            font-size: 0.9rem;
+            color: var(--accent);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Clash Display', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .section-description {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 600px;
+            opacity: 0.8;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, 
+                var(--accent) 0%, 
+                var(--accent-secondary) 100%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 4rem;
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: all 0.8s ease;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -3.5rem;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            background: var(--accent);
+            border-radius: 50%;
+            border: 3px solid var(--primary);
+            box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.2);
+        }
+
+        .experience-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2.5rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .experience-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .experience-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(245, 158, 11, 0.4);
+            box-shadow: 0 20px 60px rgba(245, 158, 11, 0.2);
+        }
+
+        .experience-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1.5rem;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .company {
+            font-size: 0.9rem;
+            color: var(--accent);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+
+        .job-title {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--card-text);
+            line-height: 1.2;
+        }
+
+        .date {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .job-description {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .achievements {
+            list-style: none;
+        }
+
+        .achievements li {
+            padding-left: 2rem;
+            margin-bottom: 1rem;
+            position: relative;
+            color: var(--card-text);
+            line-height: 1.7;
+        }
+
+        .achievements li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .skill-category {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .skill-category.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .skill-category:hover {
+            border-color: rgba(245, 158, 11, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(245, 158, 11, 0.15);
+        }
+
+        .skill-category h3 {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--card-text);
+        }
+
+        .skill-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--card-text);
+        }
+
+        .skill-bar {
+            height: 6px;
+            background: rgba(15, 23, 42, 0.08);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+            border-radius: 10px;
+            width: 0;
+            transition: width 1.5s cubic-bezier(0.65, 0, 0.35, 1);
+            position: relative;
+        }
+
+        .skill-progress::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.3), 
+                transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .skill-tag {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--accent);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: rgba(245, 158, 11, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.2);
+        }
+
+        /* Education */
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .education-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.8s ease;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .education-card.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .education-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(245, 158, 11, 0.08) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .education-card:hover::before {
+            opacity: 1;
+        }
+
+        .education-card:hover {
+            border-color: rgba(245, 158, 11, 0.4);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 24px rgba(245, 158, 11, 0.15);
+        }
+
+        .degree {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--card-text);
+            margin-bottom: 1rem;
+        }
+
+        .school {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .major {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .contact-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--card-text);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .contact-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(245, 158, 11, 0.2);
+        }
+
+        .contact-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .contact-value {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator::before {
+            content: '↓';
+            font-size: 2rem;
+            color: var(--accent);
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .cursor,
+            .cursor-follower {
+                display: none;
+            }
+
+            body {
+                cursor: auto;
+            }
+
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .nav-links a {
+                font-size: 0.8rem;
+            }
+
+            .timeline {
+                padding-left: 2rem;
+            }
+
+            .timeline-item::before {
+                left: -2.5rem;
+            }
+
+            .hero-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        /* Mobile Navigation */
+        @media (max-width: 640px) {
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+    <div class="bg-gradient"></div>
+    <div class="particles" id="particles"></div>
+
+    <nav>
+        <div class="container">
+            <div style="font-family: 'Clash Display', sans-serif; font-weight: 700; font-size: 1.2rem;">MTR</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero" id="about">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-subtitle">Strategy & Operations Leader</div>
+                <h1 class="hero-title">Morgan T.<br>Ritter</h1>
+                <p class="hero-description" style="color: rgba(226, 232, 240, 0.9);">
+                    Transforming enterprise strategy into measurable outcomes through operational excellence, 
+                    performance management, and leadership enablement.
+                </p>
+                
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">$15M+</span>
+                        <span class="stat-label">Cost Savings Delivered</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">140+</span>
+                        <span class="stat-label">Team Members Led</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">$2.2B</span>
+                        <span class="stat-label">Spend Managed</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">18+</span>
+                        <span class="stat-label">Years Experience</span>
+                    </div>
+                </div>
+
+                <div class="cta-buttons">
+                    <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                    <a href="#experience" class="btn btn-secondary">View Experience</a>
+                </div>
+            </div>
+            <div class="scroll-indicator"></div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Career Journey</div>
+                <h2 class="section-title">Experience</h2>
+                <p class="section-description">
+                    Building high-performing teams and driving transformation across Fortune 500 companies.
+                </p>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="experience-card">
+                        <div class="job-header">
+                            <div>
+                                <div class="company">Workday</div>
+                                <h3 class="job-title">Principal, Strategy & Operations</h3>
+                            </div>
+                            <div class="date">2024-Present</div>
+                        </div>
+                        <p class="job-description">
+                            Strategy & Operations leader for Workday's Global Procurement Office, partnering with Finance and enterprise leaders to translate enterprise strategy into operating cadence, performance management, and measurable outcomes.
+                        </p>
+                        <ul class="achievements">
+                            <li>Designed and launched the GPO-wide OKR program, replacing fragmented planning and reporting, aligning four departments to enterprise priorities and establishing a single executive operating rhythm adopted across the org.</li>
+                            <li>Directed the 3-Year Strategic Planning process, driving alignment across 15+ functional stakeholders and establishing a unified roadmap that shaped FY26–FY28 initiatives and informed quarterly execution cadences.</li>
+                            <li>Restructured a 140+ person global organization to address capability gaps and decision latency, redefining roles, spans of control, and succession paths to improve enterprise integration and long-term scalability.</li>
+                            <li>Led procurement's AI strategy activation, deploying operating models and upskilling frameworks that accelerated pilot-to-production timelines and reduced manual workload by 38% in targeted processes.</li>
+                            <li>Owned a $1.2M strategic vendor portfolio, achieving over 95% on-time milestone delivery while negotiating ~13% cost reductions through consolidated governance and performance accountability.</li>
+                            <li>Accelerated leadership prioritization from 3 weeks to 5 days by standardizing initiative scoring and tradeoff models, reducing priority churn and improving budget-aligned decision velocity.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="experience-card">
+                        <div class="job-header">
+                            <div>
+                                <div class="company">Zillow</div>
+                                <h3 class="job-title">Senior Strategy & Business Operations Manager</h3>
+                            </div>
+                            <div class="date">2023-2024</div>
+                        </div>
+                        <p class="job-description">
+                            Managed the Partner Strategy portfolio that defines and implements partner standards for the Zillow Premier Agent business, overseeing the partner network of 75K+ agents.
+                        </p>
+                        <ul class="achievements">
+                            <li>Scaled the Real Time Touring Product from 6 pilot markets to 90 markets in under 6 months by developing a scaled operational strategy, including sales enablement and partner training to enable over 17K+ agents.</li>
+                            <li>Developed a scaled vendor performance management system leading to a 21% partner transaction uplift in enabled markets resulting in a $4.9M increase in revenue for Q3.</li>
+                            <li>Pioneered the go-to-market strategy for the "Best of Zillow" program, optimizing high-intent leads being delivered to the best-performing partners, reaching over 47K+ real estate agents in under 4 months.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="experience-card">
+                        <div class="job-header">
+                            <div>
+                                <div class="company">Meta (Facebook)</div>
+                                <h3 class="job-title">Senior Program Manager</h3>
+                            </div>
+                            <div class="date">2022-2023</div>
+                        </div>
+                        <p class="job-description">
+                            Planned and managed the Global Partner Strategy portfolio to optimize the global workforce for a shared service operation handling millions of transactions daily.
+                        </p>
+                        <ul class="achievements">
+                            <li>Saved $13.86M in 2022 by optimizing the vendor portfolio through contract negotiations and resource consolidation.</li>
+                            <li>Built and deployed a vendor performance system to oversee $2.2B in annual spend, improving vendor accountability and driving a 15% performance uplift.</li>
+                            <li>Launched a vendor portal that cut exception request backlog by 85% through process centralization.</li>
+                            <li>Optimized BPO operations for 15 vendors, improving workforce planning and service delivery across 50K+ contractors.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="experience-card">
+                        <div class="job-header">
+                            <div>
+                                <div class="company">NVR, Inc.</div>
+                                <h3 class="job-title">Manager, Financial Cost</h3>
+                            </div>
+                            <div class="date">2019-2022</div>
+                        </div>
+                        <p class="job-description">
+                            Headed the Ryan Homes Raleigh Division's financial analysis, cost control, vendor management, and go-to-market strategy. Led a team of 10 professionals.
+                        </p>
+                        <ul class="achievements">
+                            <li>Reduced direct costs by $673K for CY 2020 through contract negotiation and vendor performance management, resulting in a 1.9% profit margin increase.</li>
+                            <li>Led the competitive RFPs, vendor selection, and management of over 100 vendors across multiple categories.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="experience-card">
+                        <div class="job-header">
+                            <div>
+                                <div class="company">NVR, Inc.</div>
+                                <h3 class="job-title">Operations Manager</h3>
+                            </div>
+                            <div class="date">2017-2019</div>
+                        </div>
+                        <p class="job-description">
+                            Led a cross-functional team of 40 across 8 production sites, overseeing strategic planning, expansions, and capital projects.
+                        </p>
+                        <ul class="achievements">
+                            <li>Led the acquisition and contract negotiation of a new 150K square foot production facility including $6.3M in equipment purchases, valued at $21M and coming in $800K under budget.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="experience-card">
+                        <div class="job-header">
+                            <div>
+                                <div class="company">U.S. Marine Corps</div>
+                                <h3 class="job-title">Director, Operations</h3>
+                            </div>
+                            <div class="date">2007-2017</div>
+                        </div>
+                        <p class="job-description">
+                            Served as a member of Marine Special Operations, culminating as a director responsible for coordination of all Special Operations Forces in Iraq (2016), consisting of a multi-national coalition spanning 11 countries and over 25 U.S. agencies.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Capabilities</div>
+                <h2 class="section-title">Skills & Expertise</h2>
+                <p class="section-description">
+                    Deep expertise in strategic operations, performance management, and organizational transformation.
+                </p>
+            </div>
+
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Strategic Leadership</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Strategic Planning</span>
+                            <span>Expert</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="95"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Performance Management</span>
+                            <span>Expert</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="93"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>OKR Programs</span>
+                            <span>Advanced</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="90"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Operations</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Vendor Management</span>
+                            <span>Expert</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="95"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Process Optimization</span>
+                            <span>Expert</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="92"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Org Design</span>
+                            <span>Advanced</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="88"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Technical Skills</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">Tableau</span>
+                        <span class="skill-tag">Power BI</span>
+                        <span class="skill-tag">Advanced Excel</span>
+                        <span class="skill-tag">GenAI Tools</span>
+                        <span class="skill-tag">PowerPoint</span>
+                        <span class="skill-tag">Jira</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Certifications</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Certified ScrumMaster</span>
+                        <span class="skill-tag">Lean Six Sigma Green Belt</span>
+                        <span class="skill-tag">Project Management</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="education">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Academic Background</div>
+                <h2 class="section-title">Education</h2>
+            </div>
+
+            <div class="education-grid">
+                <div class="education-card">
+                    <h3 class="degree">Master of Business Administration</h3>
+                    <p class="school">University of North Carolina</p>
+                    <p class="school">Kenan-Flagler Business School</p>
+                    <p class="school">Chapel Hill, NC</p>
+                    <p class="major" style="margin-top: 1rem;">Operations Management</p>
+                </div>
+
+                <div class="education-card">
+                    <h3 class="degree">Bachelor of Arts</h3>
+                    <p class="school">Ohio State University</p>
+                    <p class="school">Columbus, OH</p>
+                    <p class="major" style="margin-top: 1rem;">Political Science</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Let's Connect</div>
+                <h2 class="section-title">Get In Touch</h2>
+                <p class="section-description">
+                    Open to new opportunities and strategic partnerships.
+                </p>
+            </div>
+
+            <div class="contact-grid">
+                <a href="mailto:morgan.ritter@gmail.com" class="contact-card">
+                    <div class="contact-icon">📧</div>
+                    <div class="contact-label">Email</div>
+                    <div class="contact-value">morgan.ritter@gmail.com</div>
+                </a>
+
+                <a href="tel:614-537-1191" class="contact-card">
+                    <div class="contact-icon">📱</div>
+                    <div class="contact-label">Phone</div>
+                    <div class="contact-value">614-537-1191</div>
+                </a>
+
+                <a href="https://linkedin.com/in/morgan-ritter" target="_blank" class="contact-card">
+                    <div class="contact-icon">💼</div>
+                    <div class="contact-label">LinkedIn</div>
+                    <div class="contact-value">morgan-ritter</div>
+                </a>
+
+                <div class="contact-card">
+                    <div class="contact-icon">📍</div>
+                    <div class="contact-label">Location</div>
+                    <div class="contact-value">Salt Lake City, UT</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        const cursorFollower = document.querySelector('.cursor-follower');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            setTimeout(() => {
+                cursorFollower.style.left = e.clientX + 'px';
+                cursorFollower.style.top = e.clientY + 'px';
+            }, 100);
+        });
+
+        // Hover effects for cursor
+        const hoverElements = document.querySelectorAll('a, button, .btn');
+        hoverElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'scale(1.5)';
+                cursor.style.borderColor = '#F59E0B';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'scale(1)';
+                cursor.style.borderColor = '#F59E0B';
+            });
+        });
+
+        // Particles
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 30; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 15 + 's';
+            particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+            particlesContainer.appendChild(particle);
+        }
+
+        // Scroll Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Animate skill bars
+                    if (entry.target.classList.contains('skill-category')) {
+                        const skillBars = entry.target.querySelectorAll('.skill-progress');
+                        skillBars.forEach(bar => {
+                            const progress = bar.getAttribute('data-progress');
+                            setTimeout(() => {
+                                bar.style.width = progress + '%';
+                            }, 200);
+                        });
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements
+        document.querySelectorAll('.section-header, .timeline-item, .skill-category, .education-card').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Parallax Effect
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.hero-content');
+            parallaxElements.forEach(el => {
+                el.style.transform = `translateY(${scrolled * 0.5}px)`;
+            });
+        });
+    </script>
+</body>
+</html>
